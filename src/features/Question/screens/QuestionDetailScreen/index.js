@@ -43,7 +43,7 @@ function QuestionDetailScreen(props) {
         },
         onSubmit: async (values) => {
             try {
-                const params = { ...values };
+                const params = { ...values, likeCount: 0, dislikeCount: 0, likes: [], dislikes: [] };
                 params.tempId = uuidv4();
                 WebsocketHelper.sendAnswer(params);
                 formik.handleReset();
