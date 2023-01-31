@@ -27,7 +27,7 @@ function QuestionDetailScreen(props) {
     const navigate = useNavigate();
     const router = useRouter();
     const { isGettingDetailQuestion, detailQuestion, answers } = useSelector((state) => state?.question);
-    const { currentAccount } = useSelector((state) => state?.auth);
+    const { currentAccount, loggedIn } = useSelector((state) => state?.auth);
     const questionId = router.query?._id;
     useEffect(() => {
         if (questionId) {
@@ -166,7 +166,17 @@ function QuestionDetailScreen(props) {
                                 onChange={handleEditMyAnswerChange}
                             />
                         </div>
-                        <AppButton className='btn-orange mt-5' text='Đăng câu trả lời' onClick={formik.handleSubmit} />
+                        <AppButton
+                            className='btn-orange mt-5'
+                            text='Đăng câu trả lời'
+                            onClick={() => {
+                                if (loggedIn) {
+                                    formik.handleSubmit();
+                                } else {
+                                    navigate("/sign-in");
+                                }
+                            }}
+                        />
                     </div>
                 </div>
             </div>
