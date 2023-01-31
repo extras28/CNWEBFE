@@ -119,7 +119,6 @@ const questionSlice = createSlice({
             }
         },
         updateAnswer: (state, action) => {
-            console.log(action.payload);
             for (let i = 0; i < state.answers.length; i++) {
                 if (state.answers[i].tempId === action.payload.tempId) {
                     state.answers[i].content = action.payload.content;

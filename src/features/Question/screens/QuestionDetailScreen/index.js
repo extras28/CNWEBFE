@@ -1,6 +1,6 @@
 import DetailAnswer from "features/Question/Component/DetailAnswer";
 import DetailQuestion from "features/Question/Component/DetailQuestion";
-import { thunkGetDetailQuestion, thunkVoteDetailQuestion } from "features/Question/questionSlice";
+import { sortAnswer, thunkGetDetailQuestion, thunkVoteDetailQuestion } from "features/Question/questionSlice";
 import MdEditor from "react-markdown-editor-lite";
 import BaseLayout from "general/components/BaseLayout";
 import Loading from "general/components/Loading";
@@ -46,6 +46,7 @@ function QuestionDetailScreen(props) {
                 const params = { ...values };
                 params.tempId = uuidv4();
                 WebsocketHelper.sendAnswer(params);
+                formik.handleReset();
             } catch (error) {
                 console.log(error.message);
             }

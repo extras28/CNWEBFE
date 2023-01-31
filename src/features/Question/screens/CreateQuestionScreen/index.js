@@ -262,17 +262,19 @@ function CreateQuestionScreen(props) {
                             <div data-color-mode='light' className='fs-5 fw-bold mb-3'>
                                 Bạn đã thử những gì và bạn đang mong đợi điều gì?
                             </div>
-                            <MdEditor
-                                view={{ html: false }}
-                                canView={{ fullScreen: false }}
-                                onImageUpload={onImageUpload}
-                                allowPasteImage={true}
-                                placeholder='Nhập những cách bạn đã thử và mong đợi của bạn tại đây...'
-                                style={{ minHeight: "300px", maxHeight: "600px" }}
-                                renderHTML={(text) => <MDEditor.Markdown source={text} />}
-                                value={formik.getFieldProps("contentTextExpect").value}
-                                onChange={handleEditTextExpectChange}
-                            />
+                            <div data-color-mode='light'>
+                                <MdEditor
+                                    view={{ html: false }}
+                                    canView={{ fullScreen: false }}
+                                    onImageUpload={onImageUpload}
+                                    allowPasteImage={true}
+                                    placeholder='Nhập những cách bạn đã thử và mong đợi của bạn tại đây...'
+                                    style={{ minHeight: "300px", maxHeight: "600px" }}
+                                    renderHTML={(text) => <MDEditor.Markdown source={text} />}
+                                    value={formik.getFieldProps("contentTextExpect").value}
+                                    onChange={handleEditTextExpectChange}
+                                />
+                            </div>
                         </div>
                     </div>
 
