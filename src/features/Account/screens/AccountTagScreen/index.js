@@ -29,7 +29,7 @@ function AccounttagScreen(props) {
         q: "",
         page: 1,
         limit: Global.gDefaultPagination,
-        sortByCreateTime: "",
+        // sortByCreateTime: "",
     });
     const dispatch = useDispatch();
     const navigate = useNavigate();

@@ -97,10 +97,18 @@ function QuestionDetailScreen(props) {
                                 navigate(`/account/${detailQuestion?.account?._id}`);
                             }}
                             clickLike={() => {
-                                dispatch(thunkVoteDetailQuestion({ _id: detailQuestion?._id, reactType: 1 }));
+                                if (loggedIn) {
+                                    dispatch(thunkVoteDetailQuestion({ _id: detailQuestion?._id, reactType: 1 }));
+                                } else {
+                                    navigate("/sign-in");
+                                }
                             }}
                             clickDislike={() => {
-                                dispatch(thunkVoteDetailQuestion({ _id: detailQuestion?._id, reactType: 0 }));
+                                if (loggedIn) {
+                                    dispatch(thunkVoteDetailQuestion({ _id: detailQuestion?._id, reactType: 0 }));
+                                } else {
+                                    navigate("/sign-in");
+                                }
                             }}
                         />
                     ) : (

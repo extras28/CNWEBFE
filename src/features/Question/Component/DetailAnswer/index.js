@@ -7,6 +7,7 @@ import wsHelperInstance from "general/helpers/WebSocketClientHelper";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import ModalEditAnswer from "../ModalEditAnswer";
+import { useNavigate } from "react-router-dom";
 DetailAnswer.propTypes = {
     avatar: PropTypes.string,
     fullname: PropTypes.string,
@@ -57,8 +58,9 @@ function DetailAnswer(props) {
         answer,
         reactAnswer,
     } = props;
-    const { currentAccount } = useSelector((state) => state?.auth);
+    const { currentAccount, loggedIn } = useSelector((state) => state?.auth);
     const [showModalEditAnswer, setShowModalEditAnswer] = useState(false);
+    const navigate = useNavigate();
 
     function handleDeleteAnswer() {
         if (deleteAnswer) {
@@ -135,14 +137,30 @@ function DetailAnswer(props) {
             </div>
             <div className='mt-5 d-flex justify-content-between align-items-center flex-wrap pt-2 border-top'>
                 <div className='d-flex flex-wrap me-auto'>
-                    <div className='btn' onClick={() => handleReactAnswer(1)}>
+                    <div
+                        className='btn'
+                        onClick={() => {
+                            if (loggedIn) {
+                                handleReactAnswer(1);
+                            } else {
+                                navigate("/sign-in");
+                            }
+                        }}>
                         <i
                             className={`fas fa-thumbs-up ${
                                 likes?.includes(currentAccount?._id) ? "text-primary" : ""
                             }`}></i>
                         {likes?.length}
                     </div>
-                    <div className='btn' onClick={() => handleReactAnswer(0)}>
+                    <div
+                        className='btn'
+                        onClick={() => {
+                            if (loggedIn) {
+                                handleReactAnswer(0);
+                            } else {
+                                navigate("/sign-in");
+                            }
+                        }}>
                         <i
                             className={`fas fa-thumbs-down ${
                                 dislikes?.includes(currentAccount?._id) ? "text-danger" : ""

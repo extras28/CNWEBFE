@@ -38,7 +38,7 @@ function QuestionsListScreen(props) {
     });
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { currentAccount } = useSelector((state) => state?.auth);
+    const { currentAccount, loggedIn } = useSelector((state) => state?.auth);
     const { isGettingQuestionsList, questionsList, paginationListQuestion } = useSelector((state) => state?.question);
     // console.log(questionsList);
     useEffect(() => {
@@ -114,19 +114,22 @@ function QuestionsListScreen(props) {
                                         clickQuestion={async () => {
                                             navigate(`/question/detail/${item?._id}`);
                                         }}
-                                        clickAccount= {async () => {
+                                        clickAccount={async () => {
                                             navigate(`/account/${item?.account?._id}`);
                                         }}
                                         clickLike={() => {
-                                            // await questionApi.voteQuestion({
-                                            //     _id: item?._id,
-                                            //     reactType: 1,
-                                            // });
-                                            // await dispatch(thunkGetQuestionsList(filters));
-                                            dispatch(thunkVoteQuestion({ _id: item?._id, reactType: 1 }));
+                                            if (loggedIn) {
+                                                dispatch(thunkVoteQuestion({ _id: item?._id, reactType: 1 }));
+                                            } else {
+                                                navigate("/sign-in");
+                                            }
                                         }}
                                         clickDislike={() => {
-                                            dispatch(thunkVoteQuestion({ _id: item?._id, reactType: 0 }));
+                                            if (loggedIn) {
+                                                dispatch(thunkVoteQuestion({ _id: item?._id, reactType: 0 }));
+                                            } else {
+                                                navigate("/sign-in");
+                                            }
                                         }}
                                     />
                                 </div>

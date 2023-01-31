@@ -62,7 +62,7 @@ function BaseLayout(props) {
                 id="page-up-dashboard"
                 style = {
                     {
-                    marginBottom: "0px",
+                    marginBottom: "35px",
                     display: "none"
                     }
                 }
