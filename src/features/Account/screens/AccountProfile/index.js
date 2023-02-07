@@ -80,7 +80,7 @@ function AccountProfile(props) {
         } else {
             setThisAccount(account);
         }
-    }, [account, accountId]);
+    }, [account, accountId, currentAccount]);
 
     return (
         <div className='card mb-5 mb-xl-10 position-relative'>
